@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { MatchModule } from './match/match.module';
 
 @Module({
   imports: [
@@ -19,10 +20,11 @@ import { DataSource } from 'typeorm';
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASS'),
         database: configService.get('DATABASE_DATA'),
-        entities: [],
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
     }),
+    MatchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

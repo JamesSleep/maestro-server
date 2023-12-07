@@ -1,3 +1,4 @@
+import { CommonEntity } from 'src/common/entities/common.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,10 +10,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'match' })
-export class Match {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Match extends CommonEntity {
   @Column()
   homeTeam: string;
 
@@ -30,13 +28,4 @@ export class Match {
 
   @Column()
   score: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 }
