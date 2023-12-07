@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import {
   Column,
@@ -11,12 +12,23 @@ import {
 
 @Entity({ name: 'user' })
 export class User extends CommonEntity {
-  @Column()
+  @IsNotEmpty({ message: 'uid가 없습니다.' })
+  @Column({ nullable: false, unique: true })
+  uid: string;
+
+  @IsNotEmpty({ message: 'type이 없습니다.' })
+  @Column({ nullable: false })
+  type: string;
+
+  @IsNotEmpty({ message: '이메일을 입력해주세요.' })
+  @Column({ nullable: false, unique: true })
   email: string;
 
-  @Column()
+  @IsNotEmpty({ message: '비밀번호를 입력해주세요.' })
+  @Column({ nullable: false })
   password: string;
 
-  @Column()
+  @IsNotEmpty({ message: '닉네임을 입력해주세요.' })
+  @Column({ nullable: false, unique: true })
   nickname: string;
 }

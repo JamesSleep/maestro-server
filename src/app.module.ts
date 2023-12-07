@@ -7,7 +7,7 @@ import { DataSource } from 'typeorm';
 import { MatchModule } from './match/match.module';
 import { UserModule } from './user/user.module';
 import { CommentModule } from './comment/comment.module';
-import { CommnetController } from './commnet/commnet.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,8 +30,9 @@ import { CommnetController } from './commnet/commnet.controller';
     MatchModule,
     UserModule,
     CommentModule,
+    AuthModule,
   ],
-  controllers: [AppController, CommnetController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
