@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { MatchModule } from './match/match.module';
 import { UserModule } from './user/user.module';
+import { CommentModule } from './comment/comment.module';
+import { CommnetController } from './commnet/commnet.controller';
 
 @Module({
   imports: [
@@ -27,8 +29,9 @@ import { UserModule } from './user/user.module';
     }),
     MatchModule,
     UserModule,
+    CommentModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, CommnetController],
   providers: [AppService],
 })
 export class AppModule {
