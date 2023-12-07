@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { MatchModule } from './match/match.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MatchModule } from './match/match.module';
       }),
     }),
     MatchModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
