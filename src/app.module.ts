@@ -8,6 +8,8 @@ import { MatchModule } from './match/match.module';
 import { UserModule } from './user/user.module';
 import { CommentModule } from './comment/comment.module';
 import { AuthModule } from './auth/auth.module';
+import { ClubModule } from './club/club.module';
+import { PlayerModule } from './player/player.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     CommentModule,
     AuthModule,
+    ClubModule,
+    PlayerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
