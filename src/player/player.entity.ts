@@ -1,5 +1,6 @@
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { Column, Entity } from 'typeorm';
+import { Match } from 'src/match/match.entity';
+import { Column, Entity, ManyToMany } from 'typeorm';
 
 @Entity({ name: 'player' })
 export class Player extends CommonEntity {

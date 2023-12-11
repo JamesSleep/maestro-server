@@ -1,5 +1,6 @@
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { Column, Entity } from 'typeorm';
+import { Match } from 'src/match/match.entity';
+import { Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 
 @Entity({ name: 'club' })
 export class Club extends CommonEntity {
@@ -7,7 +8,7 @@ export class Club extends CommonEntity {
   name: string;
 
   @Column({ nullable: false })
-  birthYear: number;
+  birthYear: string;
 
   @Column({ nullable: true })
   icon: string;
