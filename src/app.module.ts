@@ -10,6 +10,7 @@ import { CommentModule } from './comment/comment.module';
 import { AuthModule } from './auth/auth.module';
 import { ClubModule } from './club/club.module';
 import { PlayerModule } from './player/player.module';
+import { TournamentModule } from './tournament/tournament.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { PlayerModule } from './player/player.module';
     AuthModule,
     ClubModule,
     PlayerModule,
+    TournamentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
