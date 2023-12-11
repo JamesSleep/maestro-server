@@ -26,4 +26,10 @@ export class Match extends CommonEntity {
 
   @Column({ nullable: true })
   score: number;
+
+  @Column({ nullable: true })
+  thumbnail: string;
+
+  @Column({ nullable: true })
+  videoLink: string;
 }
