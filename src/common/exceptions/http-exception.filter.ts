@@ -18,37 +18,20 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const error = exception.getResponse() as
       | string
-      | { error: string; message: string | string[] };
+      | { error: string; statusCode: number; message: string | string[] };
 
     if (typeof error === 'string') {
-      response.status(200).json({
+      response.status(status).json({
         success: false,
-        data: {
-          timestamp: new Date().toLocaleString(),
-          path: request.url,
-          query: request.body,
-          error,
-        },
-      });
-      this.logger.error({
-        timestamp: new Date().toLocaleString(),
+        timestamp: new Date().toISOString(),
         path: request.url,
-        query: request.body,
         error,
       });
     } else {
-      response.status(200).json({
+      response.status(status).json({
         success: false,
-        data: {
-          timestamp: new Date().toLocaleString(),
-          qurey: request.body,
-          ...error,
-        },
-      });
-      this.logger.error({
-        timestamp: new Date().toLocaleString(),
-        query: request.body,
-        error,
+        timestamp: new Date().toISOString(),
+        ...error,
       });
     }
   }

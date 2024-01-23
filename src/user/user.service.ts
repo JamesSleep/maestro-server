@@ -24,16 +24,12 @@ export class UserService {
   async create(body: CreateUserDto) {
     const { password } = body;
 
-    const isExistUid = await this.userRepository.findOne({
-      where: { uid: body.uid },
-    });
     const isExistEmail = await this.userRepository.findOne({
       where: { email: body.email },
     });
     const isExistNickname = await this.userRepository.findOne({
       where: { nickname: body.nickname },
     });
-    if (isExistUid) throw new BadRequestException('이미 존재하는 uid입니다.');
     if (isExistEmail)
       throw new BadRequestException('이미 존재하는 이메일입니다.');
     if (isExistNickname)

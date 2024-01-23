@@ -12,10 +12,6 @@ import {
 
 @Entity({ name: 'user' })
 export class User extends CommonEntity {
-  @IsNotEmpty({ message: 'uid가 없습니다.' })
-  @Column({ nullable: false, unique: true })
-  uid: string;
-
   @IsNotEmpty({ message: 'type이 없습니다.' })
   @Column({ nullable: false })
   type: string;
