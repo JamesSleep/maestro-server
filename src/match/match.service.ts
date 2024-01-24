@@ -13,7 +13,9 @@ export class MatchService {
   ) {}
 
   async findAll() {
-    return await this.matchRepository.find();
+    return await this.matchRepository.find({
+      relations: ['players'],
+    });
   }
 
   async findOne(id: number) {

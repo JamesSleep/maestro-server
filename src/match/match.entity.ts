@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Club } from 'src/club/club.entity';
 import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
@@ -8,6 +8,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -19,40 +20,47 @@ export class Match extends CommonEntity {
   comment: Comment;
 
   @IsNotEmpty({ message: '블루팀을 입력해주세요.' })
-  @ManyToOne(() => Club)
-  @JoinColumn({ name: 'blueTeamId', referencedColumnName: 'id' })
-  blueTeam: Club;
+  @IsString()
+  @Column({ nullable: false })
+  blueTeam: string;
 
   @IsNotEmpty({ message: '레드팀을 입력해주세요.' })
-  @ManyToOne(() => Club)
-  @JoinColumn({ name: 'redTeamId', referencedColumnName: 'id' })
-  redTeam: Club;
+  @IsString()
+  @Column({ nullable: false })
+  redTeam: string;
 
-  @IsNotEmpty({ message: '블루팀 선수들 입력해주세요.' })
-  @ManyToMany(() => Player)
-  blueTeamPlayers: Player[];
-
-  @IsNotEmpty({ message: '레드팀 선수들 입력해주세요.' })
-  @ManyToMany(() => Player)
-  redTeamPlayers: Player[];
+  @IsNotEmpty({ message: '경기에 참가한 선수들을 입력해주세요.' })
+  @ManyToMany(() => Player, { cascade: true })
+  @JoinTable({
+    name: 'match_players',
+    joinColumn: { name: 'matchId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'playerId', referencedColumnName: 'id' },
+  })
+  players: Player[];
 
   @IsNotEmpty({ message: '경기날짜를 입력해주세요.' })
   @Column({ nullable: false })
   matchDate: Date;
 
   @IsNotEmpty({ message: '대회명을 입력해주세요.' })
-  @ManyToMany(() => Tournament, (tournament) => tournament.match)
-  tournament: Tournament;
+  @Column({ nullable: false })
+  tournament: string;
 
   @IsNotEmpty({ message: '라운드를 입력해주세요.' })
   @Column({ nullable: false })
   round: string;
 
   @Column({ nullable: true })
+  season: string;
+
+  @Column({ nullable: true })
   score: number;
 
   @Column({ nullable: true })
   thumbnail: string;
+
+  @Column({ nullable: true })
+  poster: string;
 
   @Column({ nullable: true })
   videoLink: string;

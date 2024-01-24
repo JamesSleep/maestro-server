@@ -7,4 +7,5 @@ export class CreateMatchDto extends PickType(Match, [
   'redTeam',
   'round',
   'tournament',
+  'players',
 ]) {}
