@@ -29,6 +29,16 @@ export class Match extends CommonEntity {
   @Column({ nullable: false })
   redTeam: string;
 
+  @IsNotEmpty({ message: '블루팀 점수를 입력해주세요.' })
+  @IsString()
+  @Column({ nullable: false })
+  blueTeamScore: number;
+
+  @IsNotEmpty({ message: '레드팀 점수를 입력해주세요.' })
+  @IsString()
+  @Column({ nullable: false })
+  redTeamScore: number;
+
   @IsNotEmpty({ message: '경기에 참가한 선수들을 입력해주세요.' })
   @ManyToMany(() => Player, { cascade: true })
   @JoinTable({
@@ -64,4 +74,7 @@ export class Match extends CommonEntity {
 
   @Column({ nullable: true })
   videoLink: string;
+
+  @Column({ nullable: true })
+  tags: string;
 }

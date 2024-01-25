@@ -19,7 +19,10 @@ export class MatchService {
   }
 
   async findOne(id: number) {
-    return await this.matchRepository.findOne({ where: { id } });
+    return await this.matchRepository.findOne({
+      where: { id },
+      relations: ['players'],
+    });
   }
 
   async create(body: CreateMatchDto) {
