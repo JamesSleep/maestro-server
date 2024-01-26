@@ -4,6 +4,7 @@ import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { Player } from 'src/player/player.entity';
 import { Tournament } from 'src/tournament/tournament.entity';
+import { User } from 'src/user/user.entity';
 import {
   Column,
   Entity,
@@ -17,7 +18,15 @@ import {
 @Entity({ name: 'match' })
 export class Match extends CommonEntity {
   @OneToMany(() => Comment, (comment) => comment.match)
-  comment: Comment;
+  comment: Comment[];
+
+  @ManyToMany(() => User, { cascade: true })
+  @JoinTable({
+    name: 'match_user_like',
+    joinColumn: { name: 'matchId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'userId', referencedColumnName: 'id' },
+  })
+  user: User[];
 
   @IsNotEmpty({ message: '블루팀을 입력해주세요.' })
   @IsString()
@@ -63,7 +72,7 @@ export class Match extends CommonEntity {
   @Column({ nullable: true })
   season: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'double' })
   score: number;
 
   @Column({ nullable: true })

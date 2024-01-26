@@ -17,7 +17,10 @@ export class AuthService {
   async jwtUserLogin(data: LoginUserRequestDto) {
     const { email, password } = data;
 
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({
+      where: { email },
+      relations: ['comment'],
+    });
 
     if (!user) {
       throw new UnauthorizedException('로그인정보를 확인해주세요.');

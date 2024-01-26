@@ -9,3 +9,8 @@ export class UpdateMatchDto extends PickType(Match, [
   'tournament',
   'score',
 ]) {}
+
+export class LikeMatchDto {
+  matchId: number;
+  userId: number;
+}

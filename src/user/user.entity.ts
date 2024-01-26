@@ -1,10 +1,12 @@
 import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
+import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,6 +14,9 @@ import {
 
 @Entity({ name: 'user' })
 export class User extends CommonEntity {
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comment: Comment;
+
   @IsNotEmpty({ message: 'social type이 없습니다.' })
   @Column({ nullable: false })
   type: string;

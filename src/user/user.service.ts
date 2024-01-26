@@ -18,7 +18,10 @@ export class UserService {
   }
 
   async getOneUser(id: number) {
-    return await this.userRepository.findOne({ where: { id } });
+    return await this.userRepository.findOne({
+      where: { id },
+      relations: ['comment'],
+    });
   }
 
   async create(body: CreateUserDto) {

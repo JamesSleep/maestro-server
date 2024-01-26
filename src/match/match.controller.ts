@@ -10,21 +10,29 @@ import {
 } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { CreateMatchDto } from './dto/match.create.dto';
-import { UpdateMatchDto } from './dto/match.update.dto';
+import { LikeMatchDto, UpdateMatchDto } from './dto/match.update.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 
 @Controller('match')
 export class MatchController {
   constructor(private readonly matchService: MatchService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async getOneMatch(@Param('id') id: number) {
     return await this.matchService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getAllMatch() {
     return await this.matchService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('like')
+  async createUserLikeMatch(@Body() body: LikeMatchDto) {
+    return await this.matchService.likeMatch(body);
   }
 
   @UseGuards(JwtAuthGuard)
