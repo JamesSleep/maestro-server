@@ -34,4 +34,7 @@ export class User extends CommonEntity {
   })
   @Column({ nullable: false, unique: true })
   nickname: string;
+
+  @Column({ nullable: true })
+  profileIcon: number;
 }
