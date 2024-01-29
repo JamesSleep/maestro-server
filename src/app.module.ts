@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { ClubModule } from './club/club.module';
 import { PlayerModule } from './player/player.module';
 import { TournamentModule } from './tournament/tournament.module';
+import { GalleryModule } from './gallery/gallery.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { TournamentModule } from './tournament/tournament.module';
     ClubModule,
     PlayerModule,
     TournamentModule,
+    GalleryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

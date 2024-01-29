@@ -50,14 +50,12 @@ export class CommentService {
           match.comment.length > 1
             ? (match.score - score) / (match.comment.length - 1)
             : null;
-        console.log(match.score);
         match.comment = match.comment.filter(
           (_comment) => _comment.id !== comment.id,
         );
         comment.score = score;
         match.score =
           (match.score ? match.score : 0 + score) / (match.comment.length + 1);
-        console.log(match.score);
         match.comment = [...match.comment, comment];
         await this.matchRepository.save(match);
       }
@@ -66,6 +64,8 @@ export class CommentService {
       let comment: Comment;
       if (content) {
         comment = await this.commentRepository.save({ content, user });
+        match.comment = [...match.comment, comment];
+        await this.matchRepository.save(match);
       } else {
         comment = await this.commentRepository.save({ score, user });
         match.score =

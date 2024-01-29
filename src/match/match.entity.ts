@@ -2,6 +2,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { Club } from 'src/club/club.entity';
 import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
+import { Gallery } from 'src/gallery/gallery.entity';
 import { Player } from 'src/player/player.entity';
 import { Tournament } from 'src/tournament/tournament.entity';
 import { User } from 'src/user/user.entity';
@@ -19,6 +20,9 @@ import {
 export class Match extends CommonEntity {
   @OneToMany(() => Comment, (comment) => comment.match)
   comment: Comment[];
+
+  @OneToMany(() => Gallery, (gallery) => gallery.match)
+  gallery: Gallery[];
 
   @ManyToMany(() => User, { cascade: true })
   @JoinTable({
@@ -86,4 +90,7 @@ export class Match extends CommonEntity {
 
   @Column({ nullable: true })
   tags: string;
+
+  @Column({ nullable: true })
+  potg: string;
 }

@@ -17,14 +17,14 @@ export class MatchService {
 
   async findAll() {
     return await this.matchRepository.find({
-      relations: ['players', 'user', 'comment', 'comment.user'],
+      relations: ['players', 'user', 'comment', 'comment.user', 'gallery'],
     });
   }
 
   async findOne(id: number) {
     return await this.matchRepository.findOne({
       where: { id },
-      relations: ['players', 'user', 'comment', 'comment.user'],
+      relations: ['players', 'user', 'comment', 'comment.user', 'gallery'],
     });
   }
 
