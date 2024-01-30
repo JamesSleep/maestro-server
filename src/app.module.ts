@@ -12,6 +12,9 @@ import { ClubModule } from './club/club.module';
 import { PlayerModule } from './player/player.module';
 import { TournamentModule } from './tournament/tournament.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { HistoryModule } from './history/history.module';
+import { WinningModule } from './winning/winning.module';
+import { RecentModule } from './recent/recent.module';
 
 @Module({
   imports: [
@@ -39,6 +42,9 @@ import { GalleryModule } from './gallery/gallery.module';
     PlayerModule,
     TournamentModule,
     GalleryModule,
+    HistoryModule,
+    WinningModule,
+    RecentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

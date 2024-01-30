@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
+import { Recent } from 'src/recent/recent.entity';
 import {
   Column,
   CreateDateColumn,
@@ -16,6 +17,9 @@ import {
 export class User extends CommonEntity {
   @OneToMany(() => Comment, (comment) => comment.user)
   comment: Comment;
+
+  @OneToMany(() => Recent, (recent) => recent.user)
+  recent: Recent[];
 
   @IsNotEmpty({ message: 'social type이 없습니다.' })
   @Column({ nullable: false })

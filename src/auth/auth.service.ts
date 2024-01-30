@@ -15,6 +15,7 @@ export class AuthService {
   ) {}
 
   async jwtUserLogin(data: LoginUserRequestDto) {
+    console.log({ data });
     const { email, password } = data;
 
     const user = await this.userRepository.findOne({

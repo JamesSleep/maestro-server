@@ -1,10 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Match } from './match.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateMatchDto } from './dto/match.create.dto';
 import { LikeMatchDto, UpdateMatchDto } from './dto/match.update.dto';
 import { User } from 'src/user/user.entity';
+import { Player } from 'src/player/player.entity';
 
 @Injectable()
 export class MatchService {
@@ -13,6 +14,8 @@ export class MatchService {
     private matchRepository: Repository<Match>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(Player)
+    private playerRepository: Repository<Player>,
   ) {}
 
   async findAll() {
@@ -24,8 +27,32 @@ export class MatchService {
   async findOne(id: number) {
     return await this.matchRepository.findOne({
       where: { id },
-      relations: ['players', 'user', 'comment', 'comment.user', 'gallery'],
+      relations: [
+        'players',
+        'user',
+        'comment',
+        'comment.user',
+        'gallery',
+        'players.history',
+        'players.winning',
+        'players.user',
+      ],
     });
+  }
+
+  async search(text: string) {
+    const matches = await this.matchRepository.find({
+      where: [
+        { blueTeam: Like(`%${text}%`) },
+        { redTeam: Like(`%${text}%`) },
+        { tournament: Like(`%${text}%`) },
+      ],
+    });
+    const players = await this.playerRepository.find({
+      where: [{ name: Like(`%${text}%`) }, { realName: Like(`%${text}%`) }],
+    });
+
+    return { matches, players };
   }
 
   async create(body: CreateMatchDto) {

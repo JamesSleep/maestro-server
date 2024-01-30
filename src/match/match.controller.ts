@@ -12,10 +12,18 @@ import { MatchService } from './match.service';
 import { CreateMatchDto } from './dto/match.create.dto';
 import { LikeMatchDto, UpdateMatchDto } from './dto/match.update.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { CurrentUser } from 'src/common/decorators/user.decorators';
+import { User } from 'src/user/user.entity';
 
 @Controller('match')
 export class MatchController {
   constructor(private readonly matchService: MatchService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Get('search/:text')
+  async getSearchMatch(@Param('text') text: string) {
+    return await this.matchService.search(text);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('/:id')

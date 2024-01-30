@@ -4,6 +4,7 @@ import { Comment } from 'src/comment/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { Gallery } from 'src/gallery/gallery.entity';
 import { Player } from 'src/player/player.entity';
+import { Recent } from 'src/recent/recent.entity';
 import { Tournament } from 'src/tournament/tournament.entity';
 import { User } from 'src/user/user.entity';
 import {
@@ -23,6 +24,9 @@ export class Match extends CommonEntity {
 
   @OneToMany(() => Gallery, (gallery) => gallery.match)
   gallery: Gallery[];
+
+  @OneToMany(() => Recent, (recent) => recent.match)
+  recent: Recent[];
 
   @ManyToMany(() => User, { cascade: true })
   @JoinTable({
